@@ -1,0 +1,344 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapitalistOnSteroids | Flat White</title>
+    <style>
+        :root {
+            --bg: #0a0a0b;
+            --card-bg: #15171a;
+            --accent-green: #2ecc71;
+            --accent-blue: #3498db;
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --border: #2c2f33;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            padding: 60px 20px;
+        }
+        
+        .inv-banner {
+    width: 100%;
+    height: 120px; /* Adjust height as preferred */
+    object-fit: cover;
+    border-radius: 4px 4px 0 0;
+    margin: -20px -200px 15px -20px; /* Offsets the parent padding */
+    width: calc(100% + 40px); /* Adjusts for parent padding */
+}
+
+        /* Ticker Style */
+        .ticker {
+            background: #000;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 5px 0;
+            margin-bottom: 30px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--accent-green);
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: marquee 40s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        header {
+            border-left: 4px solid var(--accent-green);
+            padding-left: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .motto {
+            font-family: monospace;
+            color: var(--text-dim);
+            margin-top: 5px;
+        }
+
+        section { margin-bottom: 50px; }
+
+        h2 {
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        
+        /* Portfolio / File Section */
+        .file-list { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
+        .file-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 10px; 
+            border-bottom: 1px solid #1e1f22; 
+            font-family: monospace;
+        }
+        .file-item:last-child { border-bottom: none; }
+        .file-name { color: var(--accent-blue); text-decoration: none; }
+        .file-name:hover { text-decoration: underline; }
+        .file-info { color: var(--text-dim); font-size: 0.8rem; }
+        .info-btn {
+            background: #2c2f33;
+            color: var(--text-dim);
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .info-btn:hover { background: var(--accent-blue); color: #fff; }
+        .file-desc {
+            background: #18191c;
+            margin: 0 15px 12px 15px;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent-blue);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            display: none; /* Hidden by default */
+        }
+
+        p { color: var(--text-main); font-size: 1.05rem; }
+
+        .discord-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #5865F2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            font-family: "gg sans", "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+        }
+
+        .discord-btn:hover { filter: brightness(1.2); }
+
+        /* Inventory Embed Style */
+        .inventory-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--accent-green);
+            border-radius: 4px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .inv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .inv-item {
+            background: #1c1f24;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .status-tag {
+            display: inline-block;
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--accent-green);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        footer {
+    margin-top: 100px;
+    text-align: center;
+    font-size: 0.64rem; /* Reduced from 0.8rem for a much smaller look */
+    color: var(--text-dim);
+    opacity: 0.6; /* Optional: slight transparency makes it feel even more "backgrounded" */
+}
+
+        .secret-toggle {
+            cursor: pointer;
+            color: var(--accent-green);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="ticker">
+        <div class="ticker-content">
+            TIP: BUY OUT AS MUCH HIGH VALUE ITEMS AS U CAN DURING WEEKDAYS AND FLIP THEM IN THE MARKET FOR A HIGHER PRICE ON WEEKENDS(MOSTLY WORKS). 
+                  WATERMELON AND LOTUS FARMING R VERY LUCRATIVE. TIP(IRL): STOCKS CAN SOMETIMES BE DECLINING IN VALUE, NOT BECAUSE OF A FUNDAMENTAL LOSS OF VALUE BUT OF SENTIMENTS AND SPECULATIONS, WHICH EVEN IF SOMETIMES INACCURATE, COULD DECLINE THE VALUE OF A STOCK, SO DONT SPECULATE WITHOUT BASE.
+        </div>
+    </div>
+
+    <header>
+        <h1>CapitalistOnSteroids</h1>
+        <div <span class="status-tag">Holding My Bags</span></div>
+    </header>
+    
+    <div <span class="motto">"Flat White"</span>
+
+    <section id="bio">
+        <p>just a netizen interested in the internet economy. i spend my time on web development, and grinds as a die hard trader on dank memer.</p>
+        <p>big on computer and free market. mess with cs and write usable(mostly) codes which help. and spend most of my social time on discord.</p>
+    </section>
+
+    <section id="inventory-section">
+        <h2>Dank Memer Profile</h2>
+        <p>it's just my dank profile, but if you want to see what's <span class="secret-toggle" onclick="toggleInv()">inside</span></p>
+        
+        <div id="inv-display" class="inventory-card" style="display:none;">
+            <img src="dmc_banner.jpg" alt="Dank Banner" class="inv-banner">
+            <div style="font-weight: bold; color: var(--accent-green);">Dank Memer Profile: capitalistonsteroids</div>
+            <div class="inv-grid">
+                <div class="inv-item">💰 Wallet: <span style="color:var(--accent-blue)">Pretty good amount</span></div>
+                <div class="inv-item">🏛 Bank: <span style="color:var(--accent-blue)">Max</span></div>
+                <div class="inv-item">📦 Inventory: 509 items</div>
+                <div class="inv-item">🏆 Showcase: 1x Pepe Trophy, 1x Pepe Medal etc.</div>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 15px; border-top: 1px solid #333; padding-top: 10px;">
+                Don't rob, passive mode is on.
+            </p>
+        </div>
+    </section>
+
+    <section id="portfolio">
+    <h2>Web Dev Repo (Source Files)</h2>
+    <div class="file-list">
+        <div class="file-item">
+            <span>📄 <a href="PIES.zip" class="file-name" download>PIES.zip</a></span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="file-info">156.97 KB</span>
+                <button class="info-btn" onclick="toggleDesc(this)">i</button>
+            </div>
+        </div>
+        <div class="file-desc">An open source text only encrypted file storage which is completely zero-gapped(Believe me).</div>
+
+        <div class="file-item">
+            <span>📄 <a href="PIESImages.zip" class="file-name" download>PIESImages.zip</a></span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="file-info">149.69 KB</span>
+                <button class="info-btn" onclick="toggleDesc(this)">i</button>
+            </div>
+        </div>
+        <div class="file-desc">An image storage variant of the above PIES, still in development so might have bugs. But the encryption works perfectly(or at least to me).</div>
+
+        <div class="file-item">
+            <span>📄 <a href="STAN.html" class="file-name" download>STAN.html</a></span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="file-info">18.42 KB</span>
+                <button class="info-btn" onclick="toggleDesc(this)">i</button>
+            </div>
+        </div>
+        <div class="file-desc">Stakes Analyst, an app for risk management and analysis in stakes, and is pretty good at it.</div>
+
+        <div class="file-item">
+            <span>📄 <a href="fleon.css" class="file-name" download>FLEON.css</a></span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="file-info">29.36 KB</span>
+                <button class="info-btn" onclick="toggleDesc(this)">i</button>
+            </div>
+        </div>
+        <div class="file-desc">A full fledged CSS framework for nice and sharp dark themed neon aesthetic for a website.</div>
+
+        <div class="file-item">
+            <span>📄 <a href="netenomics.js" class="file-name" download>NETENOMICS.js</a></span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="file-info">31.05 KB</span>
+                <button class="info-btn" onclick="toggleDesc(this)">i</button>
+            </div>
+        </div>
+        <div class="file-desc">A comprehensive JS Library for internet economics.</div>
+    </div>
+</section>
+
+    <section id="socials">
+        <h2>Comm-Link</h2>
+        <p>Only active on Discord. Don't look for me elsewhere.</p>
+        <a href="https://discord.com/users/1453406605461815430" class="discord-btn">Discord</a>
+    </section>
+    <section id="servers">
+        <h2>Servers i Manage</h2>
+        <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+        <div>
+            <div style="font-weight: bold; color: var(--accent-green); font-family: monospace; font-size: 1rem;">STEX - Exchange and Trading</div>
+            <div style="font-size: 0.8rem; color: var(--text-dim);">A trading and exchange server with a standalone currency and market, pegged with Dank Memer market and coin.</div>
+        </div>
+        <a href="https://discord.gg/sfUQHkVQ3X" class="discord-btn" style="padding: 8px 16px; font-size: 0.85rem; background: var(--accent-blue);">Join Server</a>
+    </div>
+    </section>
+
+    <footer>
+        <p>Built with Fleon CSS</p>
+    </footer>
+</div>
+
+<script>
+    function toggleInv() {
+        const inv = document.getElementById('inv-display');
+        inv.style.display = inv.style.display === 'none' ? 'block' : 'none';
+    }
+    function toggleDesc(btn) {
+        // 1. Find the parent 'file-item'
+        const parentItem = btn.closest('.file-item');
+        
+        // 2. Find the description div that comes immediately after that item
+        const desc = parentItem.nextElementSibling;
+        
+        if (desc && desc.classList.contains('file-desc')) {
+            const isVisible = desc.style.display === 'block';
+            
+            // Toggle visibility
+            desc.style.display = isVisible ? 'none' : 'block';
+            
+            // Visual feedback: change button color when active
+            btn.style.background = isVisible ? '#2c2f33' : 'var(--accent-blue)';
+            btn.style.color = isVisible ? 'var(--text-dim)' : '#fff';
+        }
+    }
+</script>
+
+</body>
+  </html>

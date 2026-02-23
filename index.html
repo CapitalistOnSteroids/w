@@ -338,6 +338,127 @@
             btn.style.color = isVisible ? 'var(--text-dim)' : '#fff';
         }
     }
+ const responses = [
+    "%c YES. %c The market trends agree.",
+    "%c NO. %c Liquidate your positions immediately.",
+    "%c MAYBE. %c The alpha is currently redacted.",
+    "%c CERTAINLY. %c High-velocity gains detected.",
+    "%c DOUBTFUL. %c Status: Bag-holding imminent."
+];
+
+const styles = [
+    "color: #2ecc71; font-weight: bold; background: #111; padding: 2px 5px;", // Green
+    "color: #e74c3c; font-weight: bold; background: #111; padding: 2px 5px;", // Red
+    "color: #f1c40f; font-weight: bold; background: #111; padding: 2px 5px;", // Yellow
+    "color: #3498db; font-weight: bold; background: #111; padding: 2px 5px;", // Blue
+    "color: #9b59b6; font-weight: bold; background: #111; padding: 2px 5px;"  // Purple
+];
+
+// We use 'f8ball' because JS variables can't start with a number
+window.f8ball = new Proxy({}, {
+    get: function(target, prop) {
+        // Formats 'is_this_good' into 'Is this good?'
+        const question = prop.replace(/_/g, ' ') + "?";
+        const randomIndex = Math.floor(Math.random() * responses.length);
+        const [answerText, metaText] = responses[randomIndex].split(' %c ');
+
+        console.log(`%c 🎱 FLEON ORACLE: %c ${question}`, "color: white; font-weight: bold;", "color: #888;");
+        console.log(answerText + " %c " + metaText, styles[randomIndex], "color: #aaa; font-style: italic;");
+        
+        return "--- fleon.js oracle output ---";
+    }
+});
+ /**
+ * Fleon Webring: net.list
+ * A curated directory of independent netizens.
+ */
+const webringData = [
+    { name: "Lili", niche: "Idk myself, i think cats, anyway she hates dogs", url: "https://lili.lgbt" },
+    { name: "Dominique aka sdomi", niche: "reverse-engineering, networks, electronics, osdev, and retrocomputing", url: "https://sdomi.pl" },
+    { name: "CozyNet", niche: "Random Stuff", url: "https://cozynet.org" },
+    { name:"760ceb3b9c0ba4872cadf3ce35a7a494", niche: "rlly idk", url: "https://760ceb3b9c0ba4872cadf3ce35a7a494.neocities.org/" },
+    { name: "Famfo", niche: "Computer talk", url: "https://famfo.xyz" }
+];
+
+ /**
+ * Fixed Fleon Webring Easter Egg
+ */
+Object.defineProperty(window, 'net', {
+    get: function() {
+        // We return a Proxy so that simply accessing 'net.list' (without parens) 
+        // triggers the action, making it feel like a terminal command.
+        return new Proxy({}, {
+            get: (target, prop) => {
+                if (prop === 'list') {
+                    console.clear(); // Optional: clears noise for a clean look
+                    console.log("%c NEON WEBRING | ACTIVE NODES ", "color: white; background: #3498db; font-weight: bold; padding: 2px 5px;");
+                    console.table(webringData);
+                    console.log("%c Type 'net.random' to jump to a random node.", "color: #888; font-style: italic;");
+                    return "--- Directory Output Complete ---";
+                }
+                if (prop === 'random') {
+                    const randSite = webringData[Math.floor(Math.random() * webringData.length)];
+                    console.log(`%c Redirecting to: ${randSite.name}...`, "color: #2ecc71; font-weight: bold;");
+                    setTimeout(() => window.open(randSite.url, '_blank'), 1000);
+                    return `Jumping to ${randSite.niche}...`;
+                }
+                return undefined;
+            }
+        });
+    },
+    configurable: true,
+    enumerable: false
+});
+
+ /**
+ * Fleon Webring & Troll Terminal
+ * Commands: net.list, net.random, net.meme, net.hack
+ */
+Object.defineProperty(window, 'net', {
+    get: function() {
+        return new Proxy({}, {
+            get: (target, prop) => {
+                // Feature: List Webring
+                if (prop === 'list') {
+                    console.log("%c NEON WEBRING | ACTIVE NODES ", "color: white; background: #3498db; font-weight: bold; padding: 2px 5px;");
+                    console.table(webringData);
+                    return "--- Directory Output Complete ---";
+                }
+
+                // Feature: Troll Hack (The Fake Hack)
+                if (prop === 'hack') {
+                    console.warn("CRITICAL: INITIATING OVERRIDE PROTOCOL...");
+                    
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        progress += 20;
+                        console.log(`%c [SYSTEM] Hacking mainframes... ${progress}%`, "color: #2ecc71; font-family: monospace;");
+                        
+                        if (progress >= 100) {
+                            clearInterval(interval);
+                            console.log("%c [SUCCESS] ACCESS GRANTED. REDIRECTING TO SOURCE... ", "color: white; background: #e74c3c; font-weight: bold;");
+                            
+                            // Redirect to a random hot post on a meme subreddit
+                            setTimeout(() => {
+                                window.location.href = "https://www.reddit.com/r/memes/comments/d9xbez/youve_been_fooled/";
+                            }, 1000);
+                        }
+                    }, 400);
+
+                    return "Bypassing firewalls... please wait.";
+                }
+
+                // Fallback for other net properties
+                if (prop === 'random') {
+                    const site = webringData[Math.floor(Math.random() * webringData.length)];
+                    window.open(site.url, '_blank');
+                    return `Jumping to ${site.name}`;
+                }
+            }
+        });
+    },
+    configurable: true
+});
 </script>
 
 </body>

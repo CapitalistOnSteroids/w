@@ -480,6 +480,16 @@ Object.defineProperty(window, 'net', {
                     window.open(site.url, '_blank');
                     return `Jumping to ${site.name}`;
                 }
+             if (prop === 'textbased') {
+    const destination = "https://entrynode.github.io/text";
+    console.log(`%c U r going to the text based version of this site ${destination}...`, "color: #3498db; font-weight: bold;");
+   
+    setTimeout(() => {
+        window.location.href = destination;
+    }, 800);
+    
+    return "Redirecting...";
+             }
             }
         });
     },

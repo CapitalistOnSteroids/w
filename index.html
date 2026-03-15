@@ -35,11 +35,11 @@
         
         .inv-banner {
     width: 100%;
-    height: 120px; /* Adjust height as preferred */
+    height: 120px; 
     object-fit: cover;
     border-radius: 4px 4px 0 0;
-    margin: -20px -200px 15px -20px; /* Offsets the parent padding */
-    width: calc(100% + 40px); /* Adjusts for parent padding */
+    margin: -20px -200px 15px -20px; 
+    width: calc(100% + 40px); 
 }
 
         /* Ticker Style */
@@ -97,7 +97,7 @@
             padding-bottom: 10px;
         }
         
-        /* Portfolio / File Section */
+        
         .file-list { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
         .file-item { 
             display: flex; 
@@ -134,7 +134,7 @@
             border-left: 3px solid var(--accent-blue);
             font-size: 0.85rem;
             color: var(--text-dim);
-            display: none; /* Hidden by default */
+            display: none; 
         }
 
         p { color: var(--text-main); font-size: 1.05rem; }
@@ -168,7 +168,7 @@
 
         .discord-btn:hover { filter: brightness(1.2); }
 
-        /* Inventory Embed Style */
+        
         .inventory-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -204,9 +204,9 @@
         footer {
     margin-top: 100px;
     text-align: center;
-    font-size: 0.64rem; /* Reduced from 0.8rem for a much smaller look */
+    font-size: 0.64rem; 
     color: var(--text-dim);
-    opacity: 0.6; /* Optional: slight transparency makes it feel even more "backgrounded" */
+    opacity: 0.6; 
 }
 
         .secret-toggle {
@@ -374,19 +374,19 @@
         inv.style.display = inv.style.display === 'none' ? 'block' : 'none';
     }
     function toggleDesc(btn) {
-        // 1. Find the parent 'file-item'
+        
         const parentItem = btn.closest('.file-item');
         
-        // 2. Find the description div that comes immediately after that item
+        
         const desc = parentItem.nextElementSibling;
         
         if (desc && desc.classList.contains('file-desc')) {
             const isVisible = desc.style.display === 'block';
             
-            // Toggle visibility
+            
             desc.style.display = isVisible ? 'none' : 'block';
             
-            // Visual feedback: change button color when active
+            
             btn.style.background = isVisible ? '#2c2f33' : 'var(--accent-blue)';
             btn.style.color = isVisible ? 'var(--text-dim)' : '#fff';
         }
@@ -407,10 +407,10 @@ const styles = [
     "color: #9b59b6; font-weight: bold; background: #111; padding: 2px 5px;"  // Purple
 ];
 
-// We use 'f8ball' because JS variables can't start with a number
+
 window.f8ball = new Proxy({}, {
     get: function(target, prop) {
-        // Formats 'is_this_good' into 'Is this good?'
+        
         const question = prop.replace(/_/g, ' ') + "?";
         const randomIndex = Math.floor(Math.random() * responses.length);
         const [answerText, metaText] = responses[randomIndex].split(' %c ');
@@ -421,10 +421,7 @@ window.f8ball = new Proxy({}, {
         return "--- fleon.js oracle output ---";
     }
 });
- /**
- * Fleon Webring: net.list
- * A curated directory of independent netizens.
- */
+ 
 const webringData = [
     { name: "Lili", niche: "Idk myself, i think cats, anyway she hates dogs", url: "https://lili.lgbt " },
     { name: "Dominique aka sdomi", niche: "reverse-engineering, networks, electronics, osdev, and retrocomputing", url: "https://sdomi.pl " },
@@ -437,17 +434,14 @@ const webringData = [
     { name: "Lilly Schramm", niche: "Web Development and some other web stuff ig", url: "https://eps-dev.de " }
 ];
 
- /**
- * Fixed Fleon Webring Easter Egg
- */
+ 
 Object.defineProperty(window, 'net', {
     get: function() {
-        // We return a Proxy so that simply accessing 'net.list' (without parens) 
-        // triggers the action, making it feel like a terminal command.
+        
         return new Proxy({}, {
             get: (target, prop) => {
                 if (prop === 'list') {
-                    console.clear(); // Optional: clears noise for a clean look
+                    console.clear();
                     console.log("%c NEON WEBRING | ACTIVE NODES ", "color: white; background: #3498db; font-weight: bold; padding: 2px 5px;");
                     console.table(webringData);
                     console.log("%c Type 'net.random' to jump to a random node.", "color: #888; font-style: italic;");
@@ -467,22 +461,19 @@ Object.defineProperty(window, 'net', {
     enumerable: false
 });
 
- /**
- * Fleon Webring & Troll Terminal
- * Commands: net.list, net.random, net.meme, net.hack
- */
+
 Object.defineProperty(window, 'net', {
     get: function() {
         return new Proxy({}, {
             get: (target, prop) => {
-                // Feature: List Webring
+                
                 if (prop === 'list') {
                     console.log("%c NEON WEBRING | ACTIVE NODES ", "color: white; background: #3498db; font-weight: bold; padding: 2px 5px;");
                     console.table(webringData);
                     return "--- Directory Output Complete ---";
                 }
 
-                // Feature: Troll Hack (The Fake Hack)
+                
                 if (prop === 'hack') {
                     console.warn("CRITICAL: INITIATING OVERRIDE PROTOCOL...");
                     
@@ -495,7 +486,7 @@ Object.defineProperty(window, 'net', {
                             clearInterval(interval);
                             console.log("%c [SUCCESS] ACCESS GRANTED. REDIRECTING TO SOURCE... ", "color: white; background: #e74c3c; font-weight: bold;");
                             
-                            // Redirect to a random hot post on a meme subreddit
+                            
                             setTimeout(() => {
                                 window.location.href = "https://www.reddit.com/r/memes/comments/d9xbez/youve_been_fooled/";
                             }, 1000);
@@ -505,7 +496,7 @@ Object.defineProperty(window, 'net', {
                     return "Bypassing firewalls... please wait.";
                 }
 
-                // Fallback for other net properties
+                
                 if (prop === 'random') {
                     const site = webringData[Math.floor(Math.random() * webringData.length)];
                     window.open(site.url, '_blank');
